@@ -1,0 +1,32 @@
+name: Terragrunt Apply
+
+on:
+  workflow_dispatch: # manual trigger only
+
+jobs:
+  terragrunt-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Terraform & Terragrunt
+        run: |
+            # --- Install Terraform ---
+            TF_VERSION=1.8.5
+            curl -Lo terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+            unzip terraform.zip
+            sudo mv terraform /usr/local/bin/
+            terraform --version
+
+            # --- Install Terragrunt ---
+            TG_VERSION=0.66.6
+            curl -Lo terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TG_VERSION}/terragrunt_linux_amd64
+            chmod +x terragrunt
+            sudo mv terragrunt /usr/local/bin/
+            terragrunt --version
+
+      - name: Download plan artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: terragrunt-plans
+      - name: Apply all plans
+        run: terragrunt run-all apply plan.tfplan
