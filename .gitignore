@@ -1,0 +1,12 @@
+
+# Terragrunt-files
+.terragrunt-cache/
+.terragrunt-stack/
+terragrunt-debug.tfvars.json
+!**/terraform-locks/**
+
+# Python-files
+__pycache__/
+
+# MAC-files
+.DS_Store
