@@ -24,7 +24,7 @@ jobs:
             sudo mv terragrunt /usr/local/bin/
             terragrunt --version
       - name: Apply all plans
-        run: terragrunt run-all apply plan.tfplan
+        run: terragrunt run-all apply plan.tfplan --terragrunt-non-interactive --auto-approve
       - name: Download plan artifacts
         uses: actions/download-artifact@v4
         with:
