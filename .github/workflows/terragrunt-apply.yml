@@ -23,10 +23,9 @@ jobs:
             chmod +x terragrunt
             sudo mv terragrunt /usr/local/bin/
             terragrunt --version
-
+      - name: Apply all plans
+        run: terragrunt run-all apply plan.tfplan
       - name: Download plan artifacts
         uses: actions/download-artifact@v4
         with:
           name: terragrunt-plans
-      - name: Apply all plans
-        run: terragrunt run-all apply plan.tfplan
