@@ -1,0 +1,28 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended"],
+
+    "enabledManagers": ["terragrunt"],
+
+    "timezone": "Europe/Prague",
+    "schedule": ["after 11:00 and before 18:00 on Monday"],
+
+    "labels": ["deps", "terragrunt"],
+
+    "packageRules": [
+      {
+        "description": "Bump pinned Terragrunt module from edtshuma/iac",
+        "matchManagers": ["terragrunt"],
+        "matchPackageNames": ["edtshuma/iac"],
+        "groupName": "iac module bumps",
+        "automerge": false,
+        "prCreation": "immediate",
+        "stabilityDays": 0,
+        "addLabels": ["module:iac"]
+      }
+    ],
+
+    "lockFileMaintenance": {
+      "enabled": false
+    }
+  }
